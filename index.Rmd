@@ -351,7 +351,7 @@ plot_equilibrio
 ]
 
 ---
-## Desequilibrio: (P= $2)
+## Desequilibrio (P=$2)
 
 
 .right-column[
@@ -384,8 +384,7 @@ plot_equilibrio +
 
 ---
 
-##
-
+.pull-left[
 ```{r}
 df_estatica <- bind_rows(df_demanda, df_oferta, df_oferta_2)
 
@@ -398,9 +397,45 @@ df_estatica %>%
   geom_point(data=filter(df_estatica, p==1, q==15)) + 
   annotate("segment", x=15, xend=20, y=1.75, yend=1.75, arrow = arrow(length = unit(0.2, "cm"))) +
   annotate("segment", x=7.5, xend=12.5, y=1, yend=1, arrow = arrow(length = unit(0.2, "cm"))) +
-  labs(x="Q", y="P") + 
+  labs(x="Q", y="P", title="Aumento en la Oferta") + 
   guides(color="none")
 ```
+
+- ⬆️ el precio
+- ⬇️ la cantidad
+
+]
+
+.pull-right[
+```{r}
+
+df_demanda_2 <- tibble(
+  p=seq(0.5, 3, by=.5),
+  q=c(32, 25, 20, 17, 15, 14),
+  curva="Demanda 2"
+)
+
+df_estatica_2 <- bind_rows(df_demanda, df_oferta, df_demanda_2) %>% 
+  add_row(p=3, q=16, curva="Oferta") %>% 
+  add_row(p=3, q=2.5, curva="Demanda")
+
+df_estatica_2 %>% 
+  ggplot(aes(x=q, y=p, color=curva)) + 
+  geom_line() + 
+  scale_y_continuous(breaks=seq(.5, 3, by=.5)) +
+  scale_x_continuous(breaks=seq(0, 25, by=5)) +
+  scale_color_manual(values=c(colores[["celeste"]], colores[["verde"]], "orange", colores[["verde"]])) + 
+  geom_point(data=filter(df_estatica, p==1.5, q==10)) + 
+  geom_point(data=filter(df_estatica, p==2.5, q==15)) + 
+  annotate("segment", x=7.5, xend=12.5, y=2.5, yend=2.5, arrow = arrow(length = unit(0.2, "cm"))) +
+  annotate("segment", x=17.5, xend=22.5, y=1, yend=1, arrow = arrow(length = unit(0.2, "cm"))) +
+  labs(x="Q", y="P", title="Aumento en la Demanda") + 
+  guides(color="none")
+```
+
+- ⬆️ el precio
+- ⬆️ la cantidad
+]
 
 ---
 background-image: url(imgs/commodities_guerra.jpeg)
