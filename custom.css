@@ -1,0 +1,12 @@
+.pull-left {
+  
+  /* Todos los graficos van pull right  */
+  
+  margin-top: 1em;
+}
+
+img {
+  
+  max-width: 80%;
+  
+}

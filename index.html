@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <script src="index_files/header-attrs/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="custom.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
@@ -22,7 +23,12 @@ class: center, middle, inverse, title-slide
 
 background-image: url(imgs/demanda.jpg)
 background-position: bottom right
-background-size: 900px
+background-size: cover
+class: inverse
+
+&lt;style&gt;
+
+&lt;/style&gt;
 
 ## La Demanda
 
@@ -202,10 +208,6 @@ En matemáticas usamos funciones para analizar relaciones entre variables.
 
 # Ejemplo
 
-&lt;style&gt;
-
-table { margin-top: 1.1em; }
-&lt;/style&gt;
 
 
 
@@ -227,20 +229,21 @@ table { margin-top: 1.1em; }
 ]
 
 ---
+class: center
+
 ## Desequilibrio (P=$2)
 
 
-.right-column[
 &lt;img src="index_files/figure-html/unnamed-chunk-1-1.png" width="100%" /&gt;
-]
+
 
 
 ---
+class: center
 ## Desequilibrio (P=$1)
 
-.right-column[
+
 &lt;img src="index_files/figure-html/unnamed-chunk-2-1.png" width="100%" /&gt;
-]
 
 ---
 ## Estática Comparativa
@@ -251,24 +254,21 @@ table { margin-top: 1.1em; }
 
 
 ---
-## Estática Comparativa
+## Estática Comparativa: Aumento en la Oferta
 
 
-
-.pull-left[
 &lt;img src="index_files/figure-html/unnamed-chunk-3-1.png" width="100%" /&gt;
 
-- ⬆️ el precio
-- ⬇️ la cantidad
 
-]
 
-.pull-right[
+
+---
+## Estática Comparativa: Aumento en la Demanda
+
+
 &lt;img src="index_files/figure-html/unnamed-chunk-4-1.png" width="100%" /&gt;
 
-- ⬆️ el precio
-- ⬆️ la cantidad
-]
+
 
 ---
 class: center
@@ -290,32 +290,59 @@ class: center
 
 &lt;blockquote class="twitter-tweet"&gt;&lt;p lang="en" dir="ltr"&gt;War in Ukraine 🇺🇦 is upending supplies from two of the world’s largest agricultural producers, hurting the poor most and further fueling inflation. See &lt;a href="https://twitter.com/hashtag/IMFBlog?src=hash&amp;amp;ref_src=twsrc%5Etfw"&gt;#IMFBlog&lt;/a&gt; for more on the regional impacts. &lt;a href="https://t.co/LY1urh4vrj"&gt;https://t.co/LY1urh4vrj&lt;/a&gt; &lt;a href="https://t.co/z9x7x7X9v7"&gt;pic.twitter.com/z9x7x7X9v7&lt;/a&gt;&lt;/p&gt;&amp;mdash; IMF (@IMFNews) &lt;a href="https://twitter.com/IMFNews/status/1504213589346832385?ref_src=twsrc%5Etfw"&gt;March 16, 2022&lt;/a&gt;&lt;/blockquote&gt; &lt;script async src="https://platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
 ]
----
-
-
-```
-## # A tibble: 15 x 3
-##        p     q curva   
-##    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   
-##  1   0.5     0 Oferta  
-##  2   1       6 Oferta  
-##  3   1.5    10 Oferta  
-##  4   2      13 Oferta  
-##  5   2.5    15 Oferta  
-##  6   0.5     7 Oferta 2
-##  7   1      15 Oferta 2
-##  8   1.5    20 Oferta 2
-##  9   2      25 Oferta 2
-## 10   2.5    27 Oferta 2
-## 11   0.5    22 Demanda 
-## 12   1      15 Demanda 
-## 13   1.5    10 Demanda 
-## 14   2       7 Demanda 
-## 15   2.5     5 Demanda
-```
 
 
 ---
+
+# Precios máximos
+
+- Algunos gobiernos prohiben cobrar precios por encima de cierto valor.
+
+- Si el precio máximo es mayor que el valor de equilibrio de mercado, la política no tiene efecto.
+
+- Si el precio máximo es menor que el precio de equilibrio de mercado, hay un exceso de demanda.
+
+---
+# Precios Máximos
+
+&lt;img src="index_files/figure-html/unnamed-chunk-5-1.png" width="100%" /&gt;
+
+
+
+
+
+---
+class: center
+
+# Precios máximos en Argentina
+
+![](imgs/precios_maximos.png)
+
+---
+class: center
+
+# Precios máximos en Argentina (2)
+
+![](imgs/precios_cuidados.jpeg)
+
+---
+class: center
+
+# Precios máximos en Venezuela
+
+![](imgs/super_venezuela_2.png)
+
+---
+class: center
+
+# Precios máximos en Venezuela (2)
+
+![](imgs/super_venezuela_3.png)
+
+
+---
+
+
 # Precios mínimos
 
 .pull-left[
@@ -338,40 +365,26 @@ class: center
 - Si el gobierno fija un precio mínimo menor que el precio de equilibrio, rige el precio de equilibrio.
 
 
----
 
-# Precios máximos
 
-- Si el gobierno fija un precio máximo menor que el precio de equilibrio, hay un exceso de demanda.
 
----
-# Precios máximos en Argentina
 
-![](imgs/precios_maximos.png)
 
----
-
-# Precios máximos en Argentina (2)
-
-![](imgs/precios_cuidados.jpeg)
-
----
-# Precios máximos en Venezuela
-
-![](imgs/super_venezuela_2.png)
 
 
 ---
+# Elasticidad precio de la demanda
 
-# Precios máximos en Venezuela (2)
 
-![](imgs/super_venezuela_3.png)
+![](imgs/parkin_elasticidad.png)
+
+
 
 ---
 # Elasticidad Precio de la Demanda
 
 
-- Ya sambemos que si el precio sube la cantidad demandada baja, la elasticidad precio de la demanda ( `\(E_p\)` cuantifica esa caída.
+- Ya sambemos que si el precio sube la cantidad demandada baja, la elasticidad precio de la demanda ( `\(E_p\)` ) cuantifica esa caída.
 
 - Mide __cuánto__ cambia la cantidad demandada cuando cambia el precio.
 
@@ -418,11 +431,12 @@ Donde `\(\Delta P\)` es la variación absoluta de `\(P\)` ( `\(P_1 - P_0\)` ), `
 
 
 ---
-# Ejemplo
+# Ejemplo Numérico
 
 
 .pull-left[
-![](imgs/elasticidad.png)
+&lt;img src="index_files/figure-html/unnamed-chunk-6-1.png" width="100%" /&gt;
+
 ]
 
 .pull-right[
@@ -437,29 +451,24 @@ Donde `\(\Delta P\)` es la variación absoluta de `\(P\)` ( `\(P_1 - P_0\)` ), `
 # Ejemplo
 
 
-.pull-left[
 
-## Variación absoluta
 
-- La variación absoluta del precio es 20.
+### Variación absoluta
 
-- La variación absoluta de la cantidad es 80.
-]
+- La __variación absoluta__ del precio es 20.
 
-.pull-right[
+- La __variación absoluta__ de la cantidad es 80.
 
-## Variación porcentual
+- La __variación porcentual__ del precio es 20%. `\((\frac{20}{\frac{90+110}{2}})\)`
 
-- La variación porcentual del precio es 20%. `\((\frac{20}{\frac{90+110}{2}})\)`
+- La __variación porcentual__ de la cantidad es 40% `\((\frac{80}{\frac{160+240}{2}})\)`.
 
-- La variación porcentual de la cantidad es 40% `\((\frac{80}{\frac{160+240}{2}})\)`.
-
-]
 
 ---
 # Casos extremos
 
-![](imgs/extremos.png)
+&lt;img src="index_files/figure-html/unnamed-chunk-7-1.png" width="100%" /&gt;
+
 
 
 ---

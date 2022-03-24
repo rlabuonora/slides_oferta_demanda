@@ -3,7 +3,7 @@ title: "Introducción a la Economía"
 subtitle: "Oferta y Demanda"  
 output:
   xaringan::moon_reader:
-    css: xaringan-themer.css
+    css: [xaringan-themer.css, custom.css]
     nature:
       beforeInit: "https://platform.twitter.com/widgets.js"
       slideNumberFormat: "%current%"
@@ -54,7 +54,12 @@ style_mono_accent(
 
 background-image: url(imgs/demanda.jpg)
 background-position: bottom right
-background-size: 900px
+background-size: cover
+class: inverse
+
+<style>
+
+</style>
 
 ## La Demanda
 
@@ -307,10 +312,6 @@ bind_rows(df_oferta, df_oferta_2) %>%
 
 # Ejemplo
 
-<style>
-
-table { margin-top: 1.1em; }
-</style>
 
 ```{r equilibrio}
 
@@ -345,8 +346,23 @@ plot_equilibrio <- df_equilibrio %>%
   geom_point() + 
   geom_point() + 
   geom_line() + 
+    # Eje Y
+  geom_segment(aes(x=0, y=0, xend=0, yend=2.8), 
+               #arrow=arrow(type="closed", length=unit(.25, "cm")),
+               color="black",
+               alpha=.6) + 
+  # Eje X
+  geom_segment(aes(x=0, y=0, xend=25, yend=0), 
+               #arrow=arrow(type="closed", length=unit(.25, "cm")),
+                color="black",
+               alpha=.6) +
   annotate("text", label="Oferta", x= 17.5, y=2.25) +
   annotate("text", label="Demanda", x= 18.5, y=1) +
+  scale_x_continuous(expand = expansion(add=0)) +
+  scale_y_continuous(expand = expansion(add=0),
+                     breaks=c(1, 1.5, 2),
+                     limits=c(0, 2.8)) +
+
   scale_color_manual(values=c(colores[["celeste"]], colores[["verde"]])) +
   guides(color="none") + 
   labs(x="Cantidad", y="Precio")
@@ -357,28 +373,29 @@ plot_equilibrio
 ]
 
 ---
+class: center
+
 ## Desequilibrio (P=$2)
 
 
-.right-column[
 ```{r}
 plot_equilibrio + 
   annotate("segment", x=7.5, xend=12.5, y=2, yend=2, arrow=arrow(ends="both", length = unit(0.25, "cm"))) + 
   annotate("text", y=2.2, x=10, label="Exceso de Oferta", family="Lato")
 ```
-]
+
 
 
 ---
+class: center
 ## Desequilibrio (P=$1)
 
-.right-column[
+
 ```{r}
 plot_equilibrio + 
   annotate("segment", x=6.5, xend=14.5, y=1, yend=1, arrow=arrow(ends="both", length = unit(0.25, "cm")))+
   annotate("text", y=.85, x=10.3, label="Exceso de Demanda", family="Lato")
 ```
-]
 
 ---
 ## Estática Comparativa
@@ -389,33 +406,45 @@ plot_equilibrio +
 
 
 ---
-## Estática Comparativa
+## Estática Comparativa: Aumento en la Oferta
 
 
-
-.pull-left[
 ```{r}
 df_estatica <- bind_rows(df_demanda, df_oferta, df_oferta_2)
 
 df_estatica %>% 
   ggplot(aes(x=q, y=p, color=curva)) + 
-  geom_line() + 
-  scale_x_continuous(breaks=seq(0, 25, by=5)) +
+  geom_line(size=1) + 
+  scale_y_continuous(breaks=c(1, 1.5, 2), 
+                     expand=expansion(add=0)) +
+  scale_x_continuous(breaks=seq(0, 25, by=5), 
+                     expand = expansion(add=0)) +
   scale_color_manual(values=c(colores[["celeste"]], colores[["verde"]], "orange")) + 
   geom_point(data=filter(df_estatica, p==1.5, q==10)) + 
   geom_point(data=filter(df_estatica, p==1, q==15)) + 
+  # Eje Y
+  geom_segment(aes(x=0, y=0, xend=0, yend=2.8), 
+               #arrow=arrow(type="closed", length=unit(.25, "cm")),
+               color="black",
+               alpha=.6) + 
+  # Eje X
+  geom_segment(aes(x=0, y=0, xend=25, yend=0), 
+               #arrow=arrow(type="closed", length=unit(.25, "cm")),
+                color="black",
+               alpha=.6) +
   annotate("segment", x=15, xend=20, y=1.75, yend=1.75, arrow = arrow(length = unit(0.2, "cm"))) +
   annotate("segment", x=7.5, xend=12.5, y=1, yend=1, arrow = arrow(length = unit(0.2, "cm"))) +
-  labs(x="Q", y="P", title="Aumento en la Oferta") + 
+  labs(x="Q", y="P") + 
   guides(color="none")
 ```
 
-- ⬆️ el precio
-- ⬇️ la cantidad
 
-]
 
-.pull-right[
+
+---
+## Estática Comparativa: Aumento en la Demanda
+
+
 ```{r}
 
 df_demanda_2 <- tibble(
@@ -430,21 +459,29 @@ df_estatica_2 <- bind_rows(df_demanda, df_oferta, df_demanda_2) %>%
 
 df_estatica_2 %>% 
   ggplot(aes(x=q, y=p, color=curva)) + 
-  geom_line() + 
-  scale_y_continuous(breaks=seq(.5, 3, by=.5)) +
-  scale_x_continuous(breaks=seq(0, 25, by=5)) +
+  geom_line(size=1) + 
+    # Eje Y
+  geom_segment(aes(x=0, y=0, xend=0, yend=3.2), 
+               #arrow=arrow(type="closed", length=unit(.25, "cm")),
+               color="black",
+               alpha=.6) + 
+  # Eje X
+  geom_segment(aes(x=0, y=0, xend=30, yend=0), 
+               #arrow=arrow(type="closed", length=unit(.25, "cm")),
+                color="black",
+               alpha=.6) +
+  scale_y_continuous(breaks=c(1.5, 2.5), expand = expansion(add=0)) +
+  scale_x_continuous(breaks=seq(0, 25, by=5), expand=expansion(add=0)) +
   scale_color_manual(values=c(colores[["celeste"]], colores[["verde"]], "orange", colores[["verde"]])) + 
   geom_point(data=filter(df_estatica, p==1.5, q==10)) + 
   geom_point(data=filter(df_estatica, p==2.5, q==15)) + 
   annotate("segment", x=7.5, xend=12.5, y=2.5, yend=2.5, arrow = arrow(length = unit(0.2, "cm"))) +
   annotate("segment", x=17.5, xend=22.5, y=1, yend=1, arrow = arrow(length = unit(0.2, "cm"))) +
-  labs(x="Q", y="P", title="Aumento en la Demanda") + 
+  labs(x="Q", y="P") + 
   guides(color="none")
 ```
 
-- ⬆️ el precio
-- ⬆️ la cantidad
-]
+
 
 ---
 class: center
@@ -466,20 +503,124 @@ class: center
 
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">War in Ukraine 🇺🇦 is upending supplies from two of the world’s largest agricultural producers, hurting the poor most and further fueling inflation. See <a href="https://twitter.com/hashtag/IMFBlog?src=hash&amp;ref_src=twsrc%5Etfw">#IMFBlog</a> for more on the regional impacts. <a href="https://t.co/LY1urh4vrj">https://t.co/LY1urh4vrj</a> <a href="https://t.co/z9x7x7X9v7">pic.twitter.com/z9x7x7X9v7</a></p>&mdash; IMF (@IMFNews) <a href="https://twitter.com/IMFNews/status/1504213589346832385?ref_src=twsrc%5Etfw">March 16, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 ]
+
+
 ---
 
+# Precios máximos
+
+- Algunos gobiernos prohiben cobrar precios por encima de cierto valor.
+
+- Si el precio máximo es mayor que el valor de equilibrio de mercado, la política no tiene efecto.
+
+- Si el precio máximo es menor que el precio de equilibrio de mercado, hay un exceso de demanda.
+
+---
+# Precios Máximos
+
 ```{r}
+library(tibble)
+library(polynom)
+library(ggplot2)
+
+of <- tibble(
+  q=c(60, 80, 100),
+  p=c(800, 1000, 1200)
+)
+
+dem <- tibble(
+  q=c(60, 80, 100),
+  p=c(1200, 1000, 800)
+)
 
 
+of_p <- poly.calc(of$q, of$p) %>% 
+  as.function()
 
-df_oferta %>% 
-  bind_rows(df_oferta_2) %>% 
-  bind_rows(df_demanda)
-  
+dem_p <- poly.calc(dem$q, dem$p) %>% 
+  as.function
+
+theme_set(theme_minimal())
+
+puntos <- tibble(
+  q=c(60, 60, 100),
+  p=c(800, 1200, 800)
+)
+
+ggplot() + 
+  geom_function(fun=of_p, color=colores[["celeste"]]) + 
+  geom_function(fun=dem_p, color=colores[["celeste"]]) +
+  annotate("rect", xmin=40, ymin=800, xmax=Inf, ymax=Inf, 
+           alpha=.4,
+           fill="grey") +
+
+  geom_point(data=puntos, aes(q, p)) +
+  scale_x_continuous(limits = c(40, 120),
+                     breaks=c(60, 80, 100)) +
+  scale_y_continuous(breaks=seq(200, 1200, by=200), 
+                     limits=c(0, 1500)) +
+  # Eje Y
+    geom_segment(aes(x=40, y=0, xend=40, yend=Inf), alpha=.6) + 
+  # Eje X
+  geom_segment(aes(x=40, y=0, xend=Inf, yend=0), alpha=.6) + 
+  geom_segment(aes(x=40, y=800, xend=Inf, yend=800),
+               alpha=.8,
+               linetype="dashed") +
+  geom_segment(aes(x=40, y=1200, xend=60, yend=1200),
+               alpha=.6,
+               linetype="dashed") + 
+  geom_segment(aes(x=60, y=1200, xend=60, yend=0),
+               alpha=.6,
+               linetype="dashed") + 
+  geom_segment(aes(x=65, y=800, xend=95, yend=800),
+               arrow=arrow(length = unit(0.2, "cm"),
+                           ends = "both")) +
+  annotate("curve", y=1225, x=61, xend=66, yend=1280,
+           arrow=arrow(ends="first", length = unit(0.2, "cm")),
+           curvature=-.2) +
+  annotate("text", y=900, x=110, label="Zona Ilegal") + 
+  annotate("text", y=1300, x=80, label="Renta Mercado \nNegro") + 
+  annotate("text", x=80, y=700, label="Escasez") +
+  labs(x="Q", y="P", caption="Precio Máximo $800") + 
+  coord_cartesian(clip="off")
 ```
 
 
+
+
+
 ---
+class: center
+
+# Precios máximos en Argentina
+
+![](imgs/precios_maximos.png)
+
+---
+class: center
+
+# Precios máximos en Argentina (2)
+
+![](imgs/precios_cuidados.jpeg)
+
+---
+class: center
+
+# Precios máximos en Venezuela
+
+![](imgs/super_venezuela_2.png)
+
+---
+class: center
+
+# Precios máximos en Venezuela (2)
+
+![](imgs/super_venezuela_3.png)
+
+
+---
+
+
 # Precios mínimos
 
 .pull-left[
@@ -502,40 +643,26 @@ df_oferta %>%
 - Si el gobierno fija un precio mínimo menor que el precio de equilibrio, rige el precio de equilibrio.
 
 
----
 
-# Precios máximos
 
-- Si el gobierno fija un precio máximo menor que el precio de equilibrio, hay un exceso de demanda.
 
----
-# Precios máximos en Argentina
 
-![](imgs/precios_maximos.png)
 
----
-
-# Precios máximos en Argentina (2)
-
-![](imgs/precios_cuidados.jpeg)
-
----
-# Precios máximos en Venezuela
-
-![](imgs/super_venezuela_2.png)
 
 
 ---
+# Elasticidad precio de la demanda
 
-# Precios máximos en Venezuela (2)
 
-![](imgs/super_venezuela_3.png)
+![](imgs/parkin_elasticidad.png)
+
+
 
 ---
 # Elasticidad Precio de la Demanda
 
 
-- Ya sambemos que si el precio sube la cantidad demandada baja, la elasticidad precio de la demanda ( $E_p$ cuantifica esa caída.
+- Ya sambemos que si el precio sube la cantidad demandada baja, la elasticidad precio de la demanda ( $E_p$ ) cuantifica esa caída.
 
 - Mide __cuánto__ cambia la cantidad demandada cuando cambia el precio.
 
@@ -582,11 +709,45 @@ Donde $\Delta P$ es la variación absoluta de $P$ ( $P_1 - P_0$ ), $P_0$ es el p
 
 
 ---
-# Ejemplo
+# Ejemplo Numérico
 
 
 .pull-left[
-![](imgs/elasticidad.png)
+```{r fig.height=5}
+
+library(polynom)
+
+dem <- tibble(
+  q=c(160, 200, 240),
+  p=c(110, 100, 90),
+  lab=c("B", "", "A")
+)
+
+
+dem_p <- poly.calc(dem$q, dem$p) %>% 
+  as.function
+
+ggplot() + 
+  geom_function(fun=dem_p, xlim=c(120, 280), size=1) +
+  geom_point(data=dem, aes(x=q, y=p)) +
+  # Etiquetas para los puntos
+  geom_text(aes(x=q+10, y=p+10, label=lab), data=dem) +
+  scale_x_continuous(breaks=seq(0, 360, by=40)) + 
+  scale_y_continuous(breaks=seq(0, 200, by=10)) + 
+  expand_limits(y=c(0, 200),
+                x=c(0, 360)) + 
+  # Eje Y
+  geom_segment(aes(x=0, y=0, xend=0, yend=200)) + 
+  # Eje X
+  geom_segment(aes(x=0, y=0, xend=360, yend=0)) + 
+  # Highlight points
+  geom_segment(aes(x=0, y=90, xend=240, yend=90), alpha=.6) +
+  geom_segment(aes(x=0, y=110, xend=160, yend=110), alpha=.6) + 
+  geom_segment(aes(x=240, xend=240, y=90, yend=0), alpha=.6) +
+  geom_segment(aes(x=160, xend=160, y=110, yend=0), alpha=.6) +
+  labs(x="Q", y="P")
+```
+
 ]
 
 .pull-right[
@@ -601,29 +762,42 @@ Donde $\Delta P$ es la variación absoluta de $P$ ( $P_1 - P_0$ ), $P_0$ es el p
 # Ejemplo
 
 
-.pull-left[
 
-## Variación absoluta
 
-- La variación absoluta del precio es 20.
+### Variación absoluta
 
-- La variación absoluta de la cantidad es 80.
-]
+- La __variación absoluta__ del precio es 20.
 
-.pull-right[
+- La __variación absoluta__ de la cantidad es 80.
 
-## Variación porcentual
+- La __variación porcentual__ del precio es 20%. $(\frac{20}{\frac{90+110}{2}})$
 
-- La variación porcentual del precio es 20%. $(\frac{20}{\frac{90+110}{2}})$
+- La __variación porcentual__ de la cantidad es 40% $(\frac{80}{\frac{160+240}{2}})$.
 
-- La variación porcentual de la cantidad es 40% $(\frac{80}{\frac{160+240}{2}})$.
-
-]
 
 ---
 # Casos extremos
 
-![](imgs/extremos.png)
+```{r}
+ggplot() + 
+  geom_segment(aes(x=20, y=100, xend=300, yend=100), size=1) +
+  geom_segment(aes(x=200, y=0, xend=200, yend=200), size=1) +
+  scale_x_continuous(breaks=seq(0, 360, by=40)) + 
+  scale_y_continuous(breaks=seq(0, 200, by=20)) +
+  annotate("text", x=240, y=180, label="Demanda\ninelástica") + 
+  annotate("text", x=80, y=80, label="Demanda elástica") + 
+  
+  coord_fixed() +
+  expand_limits(y=c(0, 200),
+                x=c(0, 360)) + 
+  # Eje Y
+  geom_segment(aes(x=0, y=0, xend=0, yend=200)) + 
+  # Eje X
+  geom_segment(aes(x=0, y=0, xend=360, yend=0)) + 
+  labs(x="Q", y="P")
+
+```
+
 
 
 ---
